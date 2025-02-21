@@ -6,8 +6,8 @@ import * as fs from 'fs/promises';
  * Sem o .mp3
 */
 export async function deleteFileIfAlreadyExists(fileName: string) {
-    const pathToFile = path.join(__dirname, '..', 'downloads', `${fileName}.mp3`);
-    
+    const pathToFile = `/tmp/${fileName}.mp3`
+
     try {
         // Verifica se o arquivo existe
         await fs.access(pathToFile);
