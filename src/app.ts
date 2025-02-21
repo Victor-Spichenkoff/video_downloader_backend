@@ -17,6 +17,9 @@ const ytDlpPath = path.join(binPath, process.platform === "win32" ? "yt-dlp.exe"
 const ffmpegPath = path.join(binPath, process.platform === "win32" ? "ffmpeg.exe" : "ffmpeg");
 const downloadsDir = path.join(__dirname, "../downloads")
 
+app.get("/", (req:any, res: any) => res.send("Funcionando"))
+app.get("/teste", (req:any, res: any) => res.send("Funcionando"))
+
 
 fs.ensureDirSync(downloadsDir)
 
