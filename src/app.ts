@@ -65,3 +65,4 @@ app.use("/downloads", express.static(downloadsDir));
 const port = process.env.PORT ?? 2006
 
 app.listen(port, () => console.log(`Runnig on: http://localhost:${port}`))
+export default app
