@@ -38,8 +38,6 @@ export const CheckEnvAndCopy = () =>
 
     if (!fs_default.existsSync(ytDlpPath)) {
         console.log("Copying YT_DLP to: " + ytDlpPath)
-        
-        return
         fs_default.copyFileSync(ytDlpOriginalPath, ytDlpPath)
         fs_default.chmodSync(ytDlpPath, 0o755) // Permissão de execução
     }
