@@ -10,13 +10,13 @@ export const isWindows = process.platform === "win32"
 const devDownloadsDir = path.join(__dirname, "..", "downloads")
 const prodDownloadsDir = path.join(__dirname, "../tmp")
 
-const devYtDlpPath = path.join(__dirname, "bin",
+const devYtDlpPath = path.join(__dirname, "not_bin",
     `${isWindows ? "yt-dlp.exe" : "yt-dlp"}`)
 const prodYtDlPath = isWindows ?
     path.join(__dirname, "../tmp/yt-dlp.exe") :
     path.join(__dirname, "../tmp/yt-dlp")
 
-const devFfmpeg = isWindows ? path.join(__dirname, "bin/ffmpeg.exe") :  path.join(__dirname, "bin/ffmpeg")
+const devFfmpeg = isWindows ? path.join(__dirname, "not_bin/ffmpeg.exe") :  path.join(__dirname, "not_bin/ffmpeg")
 const prodFfmpeg = isWindows ? path.join(__dirname, "../tmp/ffmpeg.exe") : "/tmp/ffmpeg"
 
 // reais
@@ -37,7 +37,7 @@ const removeExtraSrc = (current: string) => {
 
 }
 
-removeExtraSrc("/opt/render/project/src/src/bin/yt-dlp")
+removeExtraSrc("/opt/render/project/src/src/not_bin/yt-dlp")
 
 
 export const ytDlpOriginalPath = removeExtraSrc(devYtDlpPath)

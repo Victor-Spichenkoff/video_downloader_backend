@@ -52,20 +52,20 @@ export const CheckEnvAndCopy = () =>
 
 
 
-export const BinExists = () => {
-    const binPath = path.join(__dirname, "bin");
-console.log("📂 Verificando binários...");
+export const not_binExists = () => {
+    const not_binPath = path.join(__dirname, "not_bin");
+console.log("📂 Verificando not_binários...");
 
-if (!fs_default.existsSync(binPath)) {
-    console.error("🚨 ERRO: Pasta 'bin' não existe!");
+if (!fs_default.existsSync(not_binPath)) {
+    console.error("🚨 ERRO: Pasta 'not_bin' não existe!");
 } else {
-    console.log("✅ Pasta 'bin' encontrada.");
+    console.log("✅ Pasta 'not_bin' encontrada.");
     
-    const files = fs_default.readdirSync(binPath);
+    const files = fs_default.readdirSync(not_binPath);
     if (files.length === 0) {
-        console.error("🚨 ERRO: Pasta 'bin' está vazia!");
+        console.error("🚨 ERRO: Pasta 'not_bin' está vazia!");
     } else {
-        console.log("📄 Arquivos na pasta 'bin':", files);
+        console.log("📄 Arquivos na pasta 'not_bin':", files);
     }
 }
 }
