@@ -40,6 +40,12 @@ export const removeExtraSrc = (current: string) => {
 removeExtraSrc("/opt/render/project/src/src/not_bin/yt-dlp")
 
 
+export const destinyPath = removeExtraSrc(
+    path.join(__dirname, "not_bin")
+)
+
+console.log("Detino das copias: "+ destinyPath)
+
 export const ytDlpOriginalPath = removeExtraSrc(devYtDlpPath)
 
 export const ffmpegOriginalPath = removeExtraSrc(devFfmpeg)
