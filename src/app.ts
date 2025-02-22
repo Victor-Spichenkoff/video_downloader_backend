@@ -1,14 +1,10 @@
-import { METHODS } from "http";
-import { deleteFileIfAlreadyExists } from "../utils/fileManager";
+import { downloadsDir } from "./paths";
+import { router } from "./routes";
 
 const express = require("express");
 const cors = require("cors");
-const { exec } = require("child_process");
-const path = require("path");
-const fs = require("fs-extra");
 
 const app = express();
-const PORT = 5000;
 
 app.use(cors({
     origin: [
@@ -16,25 +12,16 @@ app.use(cors({
         "[SITE AQUI]"
     ],
     methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Content-Disposition"], 
+    allowedHeaders: ["Content-Type", "Content-Disposition"],
     credentials: true
 }));
 app.use(express.json());
 
-const isWindows = process.platform === "win32";
-const tmpDir = "/tmp"; // Diretório temporário para a Vercel
-const downloadsDir = isWindows ? path.join(__dirname, "../tmp") : tmpDir;
+app.use(router)
 
-// Definição dos caminhos para yt-dlp e ffmpeg
-const ytDlpPath = isWindows ? path.join(__dirname, "../tmp/yt-dlp.exe") : "/tmp/yt-dlp";
-const ffmpegPath = isWindows ? path.join(__dirname, "../tmp/ffmpeg.exe") : "/tmp/ffmpeg";
-
-// Criar diretório de downloads localmente
-fs.ensureDirSync(downloadsDir);
-
-// Middleware de teste
-app.get("/", (req: any, res: any) => res.send("Funcionando"));
-app.get("/teste", (req:any, res: any) => res.send("Funcionando"));
+// aqui não muda
+// Servir arquivos de áudio (localmente)
+app.use("/downloads", express.static(downloadsDir));
 
 
 // Função para instalar yt-dlp na Vercel (caso não exista)
@@ -55,41 +42,7 @@ app.get("/teste", (req:any, res: any) => res.send("Funcionando"));
 //     }
 // }
 
-// Rota para download de áudio
-app.post("/download", async (req: any, res: any) => {
-    const { videoUrl, title = "audio" } = req.body;
-    if (!videoUrl) {
-        return res.status(400).json({ error: "O campo 'videoUrl' é obrigatório." });
-    }
 
-    const tempPath = path.join(downloadsDir, `${title}.mp3`);
-    await deleteFileIfAlreadyExists(title);
-
-    // Garantir que yt-dlp esteja disponível
-    // await ensureYtDlpExists();
-
-    const command = `"${ytDlpPath}" -x --audio-format mp3 --ffmpeg-location "${ffmpegPath}" -o "${tempPath}" "${videoUrl}"`;
-
-    console.log("Executando:", command);
-
-    exec(command, (error:any, stdout: any, stderr: any) => {
-        if (error) {
-            console.error("Erro ao baixar:", stderr);
-            return res.status(500).json({ error: "Falha ao baixar o áudio." });
-        }
-
-        // Configuração dos headers para envio do arquivo
-        res.setHeader("Content-Type", "audio/mpeg");
-        res.setHeader("Content-Disposition", `attachment; filename="${title}.mp3"`);
-
-        const fileStream = fs.createReadStream(tempPath);
-        fileStream.pipe(res);
-    });
-});
-
-// aqui não muda
-// Servir arquivos de áudio (localmente)
-app.use("/downloads", express.static(downloadsDir));
 
 
 
@@ -99,8 +52,7 @@ app.listen(port, () => console.log(`Runnig on: http://localhost:${port}`))
 export default app
 
 
-
-
+/*
 // original:
 // const binPath = path.join(__dirname, "../bin");
 // const ytDlpPath = path.join(binPath, process.platform === "win32" ? "yt-dlp.exe" : "yt-dlp");
@@ -135,7 +87,7 @@ export default app
 //         }
 
 
-//         // enviar na dorma correta 
+//         // enviar na dorma correta
 //         res.setHeader("Content-Type", "audio/mpeg");
 //         res.setHeader("Content-Disposition", `attachment; filename="${title || "audio"}.mp3"`);
 //         const filePath = path.join("downloads", `${title}.mp3`)
@@ -147,3 +99,4 @@ export default app
 //         // res.json({ message: "Download completo!", path: `/downloads/${title}.mp3` });
 //     });
 // });
+// final do original */
