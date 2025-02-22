@@ -78,36 +78,42 @@ app.post("/download", async (req: any, res: any) => {
     });
 });
 
+// aqui não muda
 // Servir arquivos de áudio (localmente)
 app.use("/downloads", express.static(downloadsDir));
 
 
 
-// const binPath = path.join(__dirname, "../bin");
-// const ytDlpPath = process.platform === "win32" ? "/tmp/yt-dlp.exe" : "/tmp/yt-dlp"
-// const ffmpegPath = process.platform === "win32" ? "/tmp/ffmpeg.exe" : "/tmp/ffmpeg"
-// const downloadsDir = "/tmp"//path.join(__dirname, "../downloads")
+const port = process.env.PORT ?? 2006
 
+app.listen(port, () => console.log(`Runnig on: http://localhost:${port}`))
+export default app
+
+
+
+
+// original:
+// const binPath = path.join(__dirname, "../bin");
+// const ytDlpPath = path.join(binPath, process.platform === "win32" ? "yt-dlp.exe" : "yt-dlp");
+// const ffmpegPath = path.join(binPath, process.platform === "win32" ? "ffmpeg.exe" : "ffmpeg");
+// const downloadsDir = path.join(__dirname, "../downloads")
 
 // app.get("/", (req:any, res: any) => res.send("Funcionando"))
 // app.get("/teste", (req:any, res: any) => res.send("Funcionando"))
 
 
-
 // fs.ensureDirSync(downloadsDir)
-
 
 // app.post("/download", async (req: any, res: any) => {
 //     const { videoUrl, title = "audio" } = req.body;
-    
+
 //     if (!videoUrl) {
 //         return res.status(400).json({ error: "O campo 'videoUrl' é obrigatório." });
 //     }
-//     const tempPath = `/tmp/${title || "audio"}.mp3`
 
 //     await deleteFileIfAlreadyExists(title)
 
-//     const outputPath = tempPath
+//     const outputPath = path.join(downloadsDir, `${title}.mp3`).replace(/\\/g, "/");
 
 //     const command = `"${ytDlpPath}" -x --audio-format mp3 --ffmpeg-location "${ffmpegPath}" -o "${outputPath}" "${videoUrl}"`;
 
@@ -123,7 +129,7 @@ app.use("/downloads", express.static(downloadsDir));
 //         // enviar na dorma correta 
 //         res.setHeader("Content-Type", "audio/mpeg");
 //         res.setHeader("Content-Disposition", `attachment; filename="${title || "audio"}.mp3"`);
-//         const filePath = path.join(`/tmp/${title}.mp3`)
+//         const filePath = path.join("downloads", `${title}.mp3`)
 
 //         const fileStream = fs.createReadStream(filePath);
 //         fileStream.pipe(res);
@@ -132,12 +138,3 @@ app.use("/downloads", express.static(downloadsDir));
 //         // res.json({ message: "Download completo!", path: `/downloads/${title}.mp3` });
 //     });
 // });
-
-// // Servir os arquivos de áudio baixados
-// app.use("/downloads", express.static(downloadsDir));
-
-
-const port = process.env.PORT ?? 2006
-
-app.listen(port, () => console.log(`Runnig on: http://localhost:${port}`))
-export default app
