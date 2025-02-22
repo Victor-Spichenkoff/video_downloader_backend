@@ -29,8 +29,9 @@ console.log("YT_DPL: " + ytDlpPath)
 console.log("FFmPEG: " + ffmpegPath)
 
 // para copiar em prod
-export const ytDlpOriginalPath = isWindows ? path.join("./bin/yt-dlp.exe") : "./bin/yt-dlp"
-export const ffmpegOriginalPath = isWindows ? path.join("./bin/ffmpeg.exe") : "./bin/ffmpeg"
+export const ytDlpOriginalPath = devYtDlpPath
+
+export const ffmpegOriginalPath = devFfmpeg
 
 console.log("Temp YT_DPL " + ytDlpOriginalPath)
 console.log("Temp FFmPEG " + ffmpegOriginalPath)
