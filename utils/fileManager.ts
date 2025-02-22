@@ -53,8 +53,8 @@ export const CheckEnvAndCopy = () =>
 
 
 export const not_binExists = () => {
-    const not_binPath = path.join(__dirname, "not_bin");
-console.log("📂 Verificando not_binários...");
+    const not_binPath = path.join(__dirname, "..", "src", "not_bin");
+console.log("📂 Verificando not_binários em: " + not_binPath);
 
 if (!fs_default.existsSync(not_binPath)) {
     console.error("🚨 ERRO: Pasta 'not_bin' não existe!");
