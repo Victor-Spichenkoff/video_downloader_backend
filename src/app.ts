@@ -9,7 +9,12 @@ const fs = require("fs-extra");
 const app = express();
 const PORT = 5000;
 
-app.use(cors());
+app.use(cors({
+    origin: [
+        "htp://localhost:3000",
+        "[SITE AQUI]"
+    ]
+}));
 app.use(express.json());
 
 const isWindows = process.platform === "win32";
@@ -29,22 +34,22 @@ app.get("/teste", (req:any, res: any) => res.send("Funcionando"));
 
 
 // Função para instalar yt-dlp na Vercel (caso não exista)
-async function ensureYtDlpExists() {
-    if (!fs.existsSync(ytDlpPath)) {
-        console.log("yt-dlp não encontrado! Instalando...");
-        await new Promise((resolve, reject) => {
-            exec("pip install yt-dlp --no-cache-dir -t /tmp/", (error: any, stdout: any, stderr: any) => {
-                if (error) {
-                    console.error(`Erro ao instalar yt-dlp: ${stderr}`);
-                    reject(error);
-                } else {
-                    console.log("yt-dlp instalado:", stdout);
-                    resolve(stdout);
-                }
-            });
-        });
-    }
-}
+// async function ensureYtDlpExists() {
+//     if (!fs.existsSync(ytDlpPath)) {
+//         console.log("yt-dlp não encontrado! Instalando...");
+//         await new Promise((resolve, reject) => {
+//             exec("pip install yt-dlp --no-cache-dir -t /tmp/", (error: any, stdout: any, stderr: any) => {
+//                 if (error) {
+//                     console.error(`Erro ao instalar yt-dlp: ${stderr}`);
+//                     reject(error);
+//                 } else {
+//                     console.log("yt-dlp instalado:", stdout);
+//                     resolve(stdout);
+//                 }
+//             });
+//         });
+//     }
+// }
 
 // Rota para download de áudio
 app.post("/download", async (req: any, res: any) => {
@@ -57,7 +62,7 @@ app.post("/download", async (req: any, res: any) => {
     await deleteFileIfAlreadyExists(title);
 
     // Garantir que yt-dlp esteja disponível
-    await ensureYtDlpExists();
+    // await ensureYtDlpExists();
 
     const command = `"${ytDlpPath}" -x --audio-format mp3 --ffmpeg-location "${ffmpegPath}" -o "${tempPath}" "${videoUrl}"`;
 
