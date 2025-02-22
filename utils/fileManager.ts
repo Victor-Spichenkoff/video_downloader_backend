@@ -1,12 +1,18 @@
 import path from "path";
 import * as fs from 'fs/promises';
+import { downloadsDir, ffmpegOriginalPath, ffmpegPath, isDev, ytDlpOriginalPath, ytDlpPath } from "../src/paths";
+import * as fs_default from "fs";
+import { exec } from "child_process";
+
 
 
 /**
  * Sem o .mp3
 */
 export async function deleteFileIfAlreadyExists(fileName: string) {
-    const pathToFile = `/tmp/${fileName}.mp3`
+    const pathToFile = path.join(downloadsDir + `\\${fileName}.mp3`)//`/tmp/${fileName}.mp3`
+
+    console.log(pathToFile)
 
     try {
         // Verifica se o arquivo existe
@@ -23,5 +29,23 @@ export async function deleteFileIfAlreadyExists(fileName: string) {
             // Outros erros
             console.error(`Erro ao apagar arquivo ${pathToFile}:`, erro);
         }
+    }
+}
+
+
+export const CheckEnvAndCopy = () =>
+{
+    if(isDev) return console.log("[DEV] Não copiar")
+
+    if (!fs_default.existsSync(ytDlpPath)) {
+        console.log("Copying YT_DLP to: " + ytDlpPath)
+        fs_default.copyFileSync(ytDlpOriginalPath, ytDlpPath);
+        fs_default.chmodSync(ytDlpPath, 0o755); // Permissão de execução
+    }
+    
+    if (!fs_default.existsSync(ffmpegPath)) {
+        console.log("Copying FFMPEG to: " + ffmpegPath)
+        fs_default.copyFileSync(ffmpegOriginalPath, ffmpegPath);
+        fs_default.chmodSync(ffmpegPath, 0o755); // Permissão de execução
     }
 }
