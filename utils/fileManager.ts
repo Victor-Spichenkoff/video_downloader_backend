@@ -37,18 +37,18 @@ export const CheckEnvAndCopy = () =>
     if(isDev) return console.log("[DEV] Não copiar")
 
     if (!fs_default.existsSync(ytDlpPath)) {
-        console.log("Copying YT_DLP to: " + destinyPath)
-        fs_default.copyFileSync(ytDlpOriginalPath, destinyPath)
-        // console.log("Copying YT_DLP to: " + ytDlpPath)
-        // fs_default.copyFileSync(ytDlpOriginalPath, ytDlpPath)
+        // console.log("Copying YT_DLP to: " + destinyPath)
+        // fs_default.copyFileSync(ytDlpOriginalPath, destinyPath)
+        console.log("Copying YT_DLP to: " + ytDlpPath+ ".exe")
+        fs_default.copyFileSync(ytDlpOriginalPath, ytDlpPath + ".exe")
         fs_default.chmodSync(ytDlpPath, 0o755) // Permissão de execução
     }
     
     if (!fs_default.existsSync(ffmpegPath)) {
-        console.log("Copying FFMPEG to: " + destinyPath)
-        fs_default.copyFileSync(ffmpegOriginalPath, destinyPath)
-        // console.log("Copying FFMPEG to: " + ffmpegPath)
-        // fs_default.copyFileSync(ffmpegOriginalPath, ffmpegPath)
+        // console.log("Copying FFMPEG to: " + destinyPath)
+        // fs_default.copyFileSync(ffmpegOriginalPath, destinyPath)
+        console.log("Copying FFMPEG to: " + ffmpegPath + ".exe")
+        fs_default.copyFileSync(ffmpegOriginalPath, ffmpegPath + ".exe")
         fs_default.chmodSync(ffmpegPath, 0o755) // Permissão de execução
     }
 }
