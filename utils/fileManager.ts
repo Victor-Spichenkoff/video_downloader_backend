@@ -48,3 +48,24 @@ export const CheckEnvAndCopy = () =>
         fs_default.chmodSync(ffmpegPath, 0o755) // Permissão de execução
     }
 }
+
+
+
+
+export const BinExists = () => {
+    const binPath = path.join(__dirname, "bin");
+console.log("📂 Verificando binários...");
+
+if (!fs_default.existsSync(binPath)) {
+    console.error("🚨 ERRO: Pasta 'bin' não existe!");
+} else {
+    console.log("✅ Pasta 'bin' encontrada.");
+    
+    const files = fs_default.readdirSync(binPath);
+    if (files.length === 0) {
+        console.error("🚨 ERRO: Pasta 'bin' está vazia!");
+    } else {
+        console.log("📄 Arquivos na pasta 'bin':", files);
+    }
+}
+}

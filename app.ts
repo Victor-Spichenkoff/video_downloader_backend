@@ -1,11 +1,11 @@
 import { configDotenv } from "dotenv"
 import { downloadsDir } from "./src/paths"
 import { router } from "./src/routes"
-import { CheckEnvAndCopy } from "./utils/fileManager"
+import { BinExists, CheckEnvAndCopy } from "./utils/fileManager"
 const express = require("express")
 const cors = require("cors")
 configDotenv()
-
+BinExists()
 
 CheckEnvAndCopy()
 
