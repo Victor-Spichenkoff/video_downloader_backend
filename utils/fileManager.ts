@@ -1,6 +1,6 @@
 import path from "path"
 import * as fs from 'fs/promises'
-import { destinyPath, downloadsDir, ffmpegOriginalPath, ffmpegPath, isDev, removeExtraSrc, ytDlpOriginalPath, ytDlpPath } from "../src/paths"
+import {  downloadsDir, ffmpegOriginalPath, ffmpegPath, isDev, removeExtraSrc, ytDlpOriginalPath, ytDlpPath } from "../src/paths"
 import * as fs_default from "fs"
 
 
