@@ -1,6 +1,6 @@
 import path from "path"
 import * as fs from 'fs/promises'
-import {  downloadsDir, ffmpegOriginalPath, ffmpegPath, isDev, removeExtraSrc, ytDlpOriginalPath, ytDlpPath } from "../src/paths"
+import {  destinyPath, downloadsDir, ffmpegOriginalPath, ffmpegPath, isDev, removeExtraSrc, ytDlpOriginalPath, ytDlpPath } from "../src/paths"
 import * as fs_default from "fs"
 
 
@@ -39,21 +39,19 @@ export const CheckEnvAndCopy = () =>
     if (!fs_default.existsSync(ytDlpPath)) {
         // console.log("Copying YT_DLP to: " + destinyPath)
         // fs_default.copyFileSync(ytDlpOriginalPath, destinyPath)
-        console.log("Copying YT_DLP to: " + ytDlpPath+ ".exe")
-        fs_default.copyFileSync(ytDlpOriginalPath, ytDlpPath + ".exe")
+        console.log("Copying YT_DLP to: " + ytDlpPath)
+        fs_default.copyFileSync(ytDlpOriginalPath, ytDlpPath )
         fs_default.chmodSync(ytDlpPath, 0o755) // Permissão de execução
     }
     
     if (!fs_default.existsSync(ffmpegPath)) {
         // console.log("Copying FFMPEG to: " + destinyPath)
         // fs_default.copyFileSync(ffmpegOriginalPath, destinyPath)
-        console.log("Copying FFMPEG to: " + ffmpegPath + ".exe")
-        fs_default.copyFileSync(ffmpegOriginalPath, ffmpegPath + ".exe")
+        console.log("Copying FFMPEG to: " + ffmpegPath )
+        fs_default.copyFileSync(ffmpegOriginalPath, ffmpegPath )
         fs_default.chmodSync(ffmpegPath, 0o755) // Permissão de execução
     }
 }
-
-
 
 
 export const not_binExists = () => {

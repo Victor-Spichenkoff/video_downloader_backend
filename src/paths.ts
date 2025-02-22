@@ -40,15 +40,15 @@ export const removeExtraSrc = (current: string) => {
 removeExtraSrc("/opt/render/project/src/src/not_bin/yt-dlp")
 
 
-// export const destinyPath = removeExtraSrc(
-//     path.join(__dirname, "not_bin")
-// )
+export const destinyPath = removeExtraSrc(
+    path.join(__dirname, "..", "tmp")
+)
 
-// console.log("Detino das copias: "+ destinyPath)
+console.log("Detino das copias: "+ destinyPath)
 
-export const ytDlpOriginalPath = removeExtraSrc(devYtDlpPath) + ".exe"
+export const ytDlpOriginalPath = removeExtraSrc(path.join(__dirname, "not_bin","yt-dlp.exe"))
 
-export const ffmpegOriginalPath = removeExtraSrc(devFfmpeg) + + ".exe"
+export const ffmpegOriginalPath = removeExtraSrc(path.join(__dirname, "not_bin","ffmpeg.exe"))
 
 console.log("Temp YT_DPL " + ytDlpOriginalPath)
 console.log("Temp FFmPEG " + ffmpegOriginalPath)
