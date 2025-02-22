@@ -1,6 +1,6 @@
 import path from "path"
 import * as fs from 'fs/promises'
-import { downloadsDir, ffmpegOriginalPath, ffmpegPath, isDev, ytDlpOriginalPath, ytDlpPath } from "../src/paths"
+import { downloadsDir, ffmpegOriginalPath, ffmpegPath, isDev, removeExtraSrc, ytDlpOriginalPath, ytDlpPath } from "../src/paths"
 import * as fs_default from "fs"
 
 
@@ -53,7 +53,7 @@ export const CheckEnvAndCopy = () =>
 
 
 export const not_binExists = () => {
-    const not_binPath = path.join(__dirname, "..", "src", "not_bin");
+    const not_binPath = removeExtraSrc(path.join(__dirname, "..", "src", "not_bin"))
 console.log("📂 Verificando not_binários em: " + not_binPath);
 
 if (!fs_default.existsSync(not_binPath)) {

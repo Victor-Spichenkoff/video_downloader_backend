@@ -30,7 +30,7 @@ console.log("FFmPEG: " + ffmpegPath)
 
 // para copiar em prod
 //para a render:
-const removeExtraSrc = (current: string) => {
+export const removeExtraSrc = (current: string) => {
     if(current.indexOf("/src") == current.lastIndexOf("/src")) return current
 
     return current.replace("/src", "")
