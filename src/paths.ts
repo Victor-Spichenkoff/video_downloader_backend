@@ -16,7 +16,7 @@ const prodYtDlPath = isWindows ?
     path.join(__dirname, "../tmp/yt-dlp.exe") :
     path.join(__dirname, "../tmp/yt-dlp")
 
-const devFfmpeg = isWindows ? path.join(__dirname, "bin/ffmpeg.exe") : "bin/ffmpeg"
+const devFfmpeg = isWindows ? path.join(__dirname, "bin/ffmpeg.exe") :  path.join(__dirname, "bin/ffmpeg")
 const prodFfmpeg = isWindows ? path.join(__dirname, "../tmp/ffmpeg.exe") : "/tmp/ffmpeg"
 
 // reais
@@ -29,9 +29,20 @@ console.log("YT_DPL: " + ytDlpPath)
 console.log("FFmPEG: " + ffmpegPath)
 
 // para copiar em prod
-export const ytDlpOriginalPath = devYtDlpPath
+//para a render:
+const removeExtraSrc = (current: string) => {
+    if(current.indexOf("/src") == current.lastIndexOf("/src")) return current
 
-export const ffmpegOriginalPath = devFfmpeg
+    return current.replace("/src", "")
+
+}
+
+removeExtraSrc("/opt/render/project/src/src/bin/yt-dlp")
+
+
+export const ytDlpOriginalPath = removeExtraSrc(devYtDlpPath)
+
+export const ffmpegOriginalPath = removeExtraSrc(devFfmpeg)
 
 console.log("Temp YT_DPL " + ytDlpOriginalPath)
 console.log("Temp FFmPEG " + ffmpegOriginalPath)
