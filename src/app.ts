@@ -1,3 +1,4 @@
+import { METHODS } from "http";
 import { deleteFileIfAlreadyExists } from "../utils/fileManager";
 
 const express = require("express");
@@ -11,9 +12,12 @@ const PORT = 5000;
 
 app.use(cors({
     origin: [
-        "htp://localhost:3000",
+        "http://localhost:3000",
         "[SITE AQUI]"
-    ]
+    ],
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Content-Disposition"], 
+    credentials: true
 }));
 app.use(express.json());
 
