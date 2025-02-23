@@ -46,9 +46,7 @@ export const destinyPath = removeExtraSrc(
 
 console.log("Detino das copias: "+ destinyPath)
 
-export const ytDlpOriginalPath = removeExtraSrc(path.join(__dirname, "not_bin","yt-dlp.exe"))
-
-export const ffmpegOriginalPath = removeExtraSrc(path.join(__dirname, "not_bin","ffmpeg.exe"))
-
+export const ytDlpOriginalPath = path.join(__dirname, "not_bin","yt-dlp.exe")
+export const ffmpegOriginalPath = path.join(__dirname, "not_bin","ffmpeg.exe")
 console.log("Temp YT_DPL " + ytDlpOriginalPath)
 console.log("Temp FFmPEG " + ffmpegOriginalPath)

@@ -1,8 +1,14 @@
-- A render funciona, mas dá o erro:
-/opt/render/project/src/tmp\teste.mp3
-Arquivo /opt/render/project/src/tmp\teste.mp3 não existe.
-Executando: "/opt/render/project/src/tmp/yt-dlp" -x --audio-format mp3 --ffmpeg-location "/tmp/ffmpeg" -o "/opt/render/project/src/tmp/teste.mp3" "https://www.youtube.com/watch?v=tsduflwerJc"
-Erro ao baixar: /bin/sh: 1: /opt/render/project/src/tmp/yt-dlp: not found
+- A render:
+Downlaod: /opt/render/project/src/tmp
+YT_DPL: /opt/render/project/src/tmp/yt-dlp
+FFmPEG: /tmp/ffmpeg
+Detino das copias: /opt/render/project/src/tmp
+Temp YT_DPL /opt/render/project/src/not_bin/yt-dlp.exe
+Temp FFmPEG /opt/render/project/src/not_bin/ffmpeg.exe
+📂 Verificando not_binários em: /opt/render/project/src/not_bin
+🚨 ERRO: Pasta 'not_bin' não existe!
+Copying YT_DLP to: /opt/render/project/src/tmp/yt-dlp
+Error: ENOENT: no such file or directory, copyfile '/opt/render/project/src/not_bin/yt-dlp.exe' -> '/opt/render/project/src/tmp/yt-dlp'
 
 - A vercel nem builda:
 Downlaod: /var/task/tmp
