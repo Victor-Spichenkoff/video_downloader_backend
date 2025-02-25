@@ -1,14 +1,14 @@
 import { configDotenv } from "dotenv"
 import { downloadsDir } from "./src/paths"
 import { router } from "./src/routes"
-import { CheckEnvAndCopy, not_binExists } from "./utils/fileManager"
+import { CheckEnvAndCopy, InstallLinuxFiles, not_binExists } from "./utils/fileManager"
 const express = require("express")
 const cors = require("cors")
 configDotenv()
 not_binExists()
 
-CheckEnvAndCopy()
-
+CheckEnvAndCopy()//só para windows, copia os meus
+// InstallLinuxFiles()
 const app = express()
 
 app.use(cors({
