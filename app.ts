@@ -7,8 +7,8 @@ const cors = require("cors")
 configDotenv()
 not_binExists()
 
-CheckEnvAndCopy()//só para windows, copia os meus
-// InstallLinuxFiles()
+// CheckEnvAndCopy()//só para windows, copia os meus
+InstallLinuxFiles()
 const app = express()
 
 app.use(cors({

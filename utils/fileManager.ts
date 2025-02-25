@@ -64,13 +64,17 @@ export const InstallLinuxFiles = () => {
         fs_default.chmodSync(ytDlpPath, 0o755) // Permissão de execução
     }
 
+
+    const ffmpegZipPath = path.join(__dirname, "..", "tmp","ffmpeg.tar.xz")
+    const tmp = path.join(__dirname, "..", "tmp")
+
     if (!fs_default.existsSync(ffmpegPath)) {
         console.log("⚠ ffmpeg não encontrado! Baixando versão correta...")
         execSync(`
-            curl -L https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz -o /tmp/ffmpeg.tar.xz
-            tar -xvf /tmp/ffmpeg.tar.xz -C /tmp/
-            mv /tmp/ffmpeg-*-static/ffmpeg /tmp/ffmpeg
-            chmod +x /tmp/ffmpeg
+            curl -L https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz -o ${ffmpegZipPath}
+            tar -xvf ${ffmpegZipPath} -C ${tmp}/
+            mv ${tmp}/ffmpeg-*-static/ffmpeg ${tmp}/ffmpeg
+            chmod +x ${tmp}/ffmpeg
         `)
         console.log("Teminou de baixar ffmpeg")
         return
